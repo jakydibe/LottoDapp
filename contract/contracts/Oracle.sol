@@ -12,7 +12,7 @@ contract Oracle {
     address public owner;
     ILottery public lottery;
     
-    constructor(address _lottery) {
+    constructor(address _lottery) payable {
         owner = msg.sender;
         lottery = ILottery(_lottery);
     }

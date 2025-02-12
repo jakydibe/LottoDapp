@@ -3,7 +3,7 @@ import requests
 from web3 import Web3
 
 # Connetti al nodo locale (assicurati che sia in esecuzione)
-w3 = Web3(Web3.HTTPProvider("http://localhost:8545"))
+w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
 if not w3.is_connected():
     raise Exception("Errore nella connessione a localhost:8545")
 
@@ -36,7 +36,8 @@ transaction = oracle_contract.functions.requestExternalData(random_number).build
     'from': account,
     'nonce': nonce,
     'gas': 500000,
-    'gasPrice': w3.to_wei('20', 'gwei')
+    'gasPrice': w3.to_wei('20', 'gwei'),
+    'chainId': 31337  # ID chain di Hardhat
 })
 
 # Firma e invia la transazione (assicurati di avere la chiave privata se necessario)

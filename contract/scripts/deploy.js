@@ -5,13 +5,13 @@ async function main() {
 
   // Deploy del contratto Lottery con placeholder per l'oracolo
   const Lottery = await ethers.getContractFactory("Lottery");
-  const lottery = await Lottery.deploy("0x0000000000000000000000000000000000000000");
+  const lottery = await Lottery.deploy("0x0000000000000000000000000000000000000000", {value: ethers.parseEther("100.0")});
   await lottery.waitForDeployment();
   console.log("Lottery deployed to:", lottery.target);
 
   // Deploy del contratto Oracle, passando l'indirizzo del contratto Lottery
   const Oracle = await ethers.getContractFactory("Oracle");
-  const oracle = await Oracle.deploy(lottery.target);
+  const oracle = await Oracle.deploy(lottery.target, {value: ethers.parseEther("100.0")});
   await oracle.waitForDeployment();
   console.log("Oracle deployed to:", oracle.target);
 
